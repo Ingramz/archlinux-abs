@@ -4,9 +4,6 @@ inputs:
   PRIVATE_KEY:
     required: true
     description: something
-  PUBLIC_KEY:
-    required: true
-    description: something
   PACKAGER:
     required: true
     description: something
@@ -18,11 +15,9 @@ inputs:
     description: something
 runs:
   using: 'docker'
-  image: 'docker://ingram/archlinux-abs:latest'
+  image: 'Dockerfile'
   env:
     PRIVATE_KEY: ${{ inputs.PRIVATE_KEY }}
-    PUBLIC_KEY: ${{ inputs.PUBLIC_KEY }}
     PACKAGER: ${{ inputs.PACKAGER }}
     GPGKEY: ${{ inputs.GPGKEY }}
     REPONAME: ${{ inputs.REPONAME }}
-
