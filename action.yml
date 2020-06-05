@@ -3,20 +3,25 @@ description: 'Builds packages and produces a repository'
 inputs:
   PRIVATE_KEY:
     required: true
+    description: something
   PUBLIC_KEY:
     required: true
+    description: something
   PACKAGER:
     required: true
+    description: something
   GPGKEY:
     required: true
+    description: something
   REPONAME:
     required: true
+    description: something
 runs:
   using: 'docker'
   image: 'docker://Ingramz/archlinux-abs:latest'
   args:
-    - echo ${{ inputs.PRIVATE_KEY }} gpg --import
-    - echo ${{ inputs.PUBLIC_KEY }} gpg --import
+    - echo ${{ inputs.PRIVATE_KEY }} | gpg --import
+    - echo ${{ inputs.PUBLIC_KEY }} | gpg --import
     - pacman -Syu --nonconfirm
     - mkdir /build
     - cp -r * /build
