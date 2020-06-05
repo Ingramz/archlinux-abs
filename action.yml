@@ -1,6 +1,10 @@
 name: 'Arch Linux Package Builder'
 description: 'Builds packages and produces a repository'
 inputs:
+  PRIVATE_KEY:
+    required: true
+  PUBLIC_KEY:
+    required: true
   PACKAGER:
     required: true
   GPGKEY:
@@ -11,6 +15,8 @@ runs:
   using: 'docker'
   image: 'docker://Ingramz/archlinux-abs:latest'
   args:
+    - echo ${{ inputs.PRIVATE_KEY }} gpg --import
+    - echo ${{ inputs.PUBLIC_KEY }} gpg --import
     - pacman -Syu --nonconfirm
     - mkdir /build
     - cp -r * /build
