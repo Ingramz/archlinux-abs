@@ -5,7 +5,6 @@ RUN pacman -Syu --noconfirm && \
     yes | pacman -Scc && \
     useradd -u 1000 -d /home/builder -m builder && \
     echo 'builder ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers && \
-     && \
     chown -R builder /build /repo
 
 COPY entrypoint.sh /entrypoint.sh
