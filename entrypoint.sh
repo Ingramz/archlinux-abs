@@ -1,7 +1,7 @@
 #!/bin/sh
 
-su - -w PRIVATE_KEY builder -c 'echo $PRIVATE_KEY | gpg --import -'
-su - -w PUBLIC_KEY builder -c 'echo $PUBLIC_KEY | gpg --import -'
+su - -w PRIVATE_KEY builder -c 'echo "$PRIVATE_KEY" | gpg --import'
+su - -w PUBLIC_KEY builder -c 'echo "$PUBLIC_KEY" | gpg --import'
 pacman -Syu --noconfirm
 mkdir /build
 cp -r * /build
