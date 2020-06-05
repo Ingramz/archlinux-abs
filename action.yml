@@ -1,0 +1,23 @@
+name: 'Arch Linux Package Builder'
+description: 'Builds packages and produces a repository'
+inputs:
+  PACKAGER:
+    required: true
+  GPGKEY:
+    required: true
+  REPONAME:
+    required: true
+runs:
+  using: 'docker'
+  image: 'docker://Ingramz/archlinux-abs:latest'
+  args:
+    - pacman -Syu --nonconfirm
+    - mkdir /build
+    - cp -r * /build
+    - chown -R builder /build
+    - su -l makepkg -c 'cd /build && PACKAGER=${{ inputs.PACKAGER } GPGKEY=${{ inputs.GPGKEY }} makepkg --sign --noconfirm -s'
+    - mkdir /repo
+    - mv /build/*.pkg.tar.xz /build/*.pkg.tar.xz.sign /repo
+    - cd /repo
+    - repo-add ${{ inputs.REPONAME }}.db *.pkg.tar.xz
+    - mv /repo $GITHUB_WORKSPACE
