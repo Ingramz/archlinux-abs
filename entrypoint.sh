@@ -7,7 +7,7 @@ cp -r * /build
 chown -R builder /build
 su - -w PACKAGER,GPGKEY builder -c 'cd /build && makepkg --sign --noconfirm -s'
 mkdir /repo
-mv /build/*.pkg.tar.xz /build/*.pkg.tar.xz.sign /repo
+mv /build/*.pkg.tar.xz /build/*.pkg.tar.xz.sig /repo
 cd /repo
-repo-add $REPONAME.db *.pkg.tar.xz
+repo-add $REPONAME.db.tar.xz *.pkg.tar.xz
 mv /repo $GITHUB_WORKSPACE
