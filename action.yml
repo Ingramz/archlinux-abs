@@ -18,7 +18,7 @@ inputs:
     description: something
 runs:
   using: 'docker'
-  image: 'docker://ingramz/archlinux-abs:latest'
+  image: 'docker://ingram/archlinux-abs:latest'
   args:
     - echo ${{ inputs.PRIVATE_KEY }} | gpg --import
     - echo ${{ inputs.PUBLIC_KEY }} | gpg --import
